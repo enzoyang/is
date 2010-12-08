@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"
+    >
+<html lang="en">
+<head>
+    <title>登录系统</title>
+</head>
+<body>
+    <form method=POST action="/login">
+        <label for="username">用户：</label><input type="text" name="username" id="username"/>
+        <br/>
+        <label for="password">密码：</label><input type="password" name="password" id="password"/>
+        <br/>
+        {% if errors:%}
+        <label id="errors">{{errors}}</label>
+        {%endif%}
+        <br/>
+        <input type="submit" value="登录"/>
+    </form>
+</body>
+</html>
