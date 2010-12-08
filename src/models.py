@@ -71,7 +71,7 @@ class Electric(Base):
         self.monthlyExpense = _monthlyExpense
     
     def __repr__(self):
-        return "Water(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
+        return "Electric(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
         
         
 #初始化数据库
