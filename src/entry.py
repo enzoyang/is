@@ -3,10 +3,10 @@ import web
 from settings import load_sqlalchemy
 
 urls=(
-    '/(.*)/','views.Redirect',
-    '/login','views.Login',
-    '/error/(.*)','views.Error',
-    '/adduser','views.AddUser',
+    '/(.*)/','acount_views.Redirect',
+    '/login','acount_views.Login',
+    '/error/(.*)','acount_views.Error',
+    '/adduser','acount_views.AddUser',
 )
 
 app = web.application(urls,globals())
