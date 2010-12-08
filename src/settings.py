@@ -27,6 +27,10 @@ def load_sqlalchemy(handler):
     finally:
         web.ctx.orm.commit()
 
+def load_session(handler):
+    web.ctx.session = web.config._session
+    return handler()
+
 #错误信息
 class Errors:
     usernameOrPasswordNotBeNull = u'用户名和密码不能为空'

@@ -28,7 +28,9 @@ class AddUser:
 
 class Login:
     def GET(self):
-        return account_render.login()
+        isLogin = web.ctx.session.get('isLogin',0)
+    
+        return account_render.login(isLogin=isLogin)
     
     def POST(self):
         i = web.input(username=None,password=None)
@@ -36,6 +38,7 @@ class Login:
             u = web.ctx.orm.query(Account).filter_by(name=i.username,password=i.password).first()
             if u:
                 #pass # 验证成功，转向。
+                web.ctx.session.isLogin = 1;
                 return '登录成功'
             else:#验证失败
                 return account_render.login(errors=Errors.usernameAndPasswordVerifyFailure)

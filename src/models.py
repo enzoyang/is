@@ -58,7 +58,7 @@ class Water(Base):
 class Electric(Base):
     __tablename__ = 'electrics'
     
-    id = Column(Integer,primary_key)
+    id = Column(Integer,primary_key=True)
     userId = Column(Integer,ForeignKey('users.id'))
     totalDegrees = Column(Integer)
     monthlyDegrees = Column(Integer)
