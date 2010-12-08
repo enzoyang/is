@@ -6,11 +6,12 @@ web.config.debug = False
 
 urls=(
     #global
-    '/(.*)/','account_views.Redirect',
+    '/(.*)/','common.Redirect',
+    '/error/(.*)','common.Error',
     #account
-    '/login','account_views.Login',
-    '/error/(.*)','account_views.Error',
-    '/adduser','account_views.AddUser',
+    '/','account.Login',
+    '/login','account.Login',
+    '/logout','account.Logout',
     #expense
     
 )
