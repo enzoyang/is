@@ -55,7 +55,25 @@ class Water(Base):
     def __repr__(self):
         return "Water(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
     
+class Electric(Base):
+    __tablename__ = 'electrics'
     
+    id = Column(Integer,primary_key)
+    userId = Column(Integer,ForeignKey('users.id'))
+    totalDegrees = Column(Integer)
+    monthlyDegrees = Column(Integer)
+    monthlyExpense = Column(Numeric)
+    
+    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense):
+        self.userId = _userId
+        self.totalDegrees = _totalDegrees
+        self.monthlyDegrees = _monthlyDegrees
+        self.monthlyExpense = _monthlyExpense
+    
+    def __repr__(self):
+        return "Water(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
+        
+        
 #初始化数据库
 metadata = Base.metadata
 
