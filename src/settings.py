@@ -6,8 +6,8 @@ from sqlalchemy.orm import scoped_session,sessionmaker
 from web.contrib.template import render_jinja
 
 #数据库驱动
-engine = create_engine('sqlite:///data/infosys.db')
-
+infosys_engine = create_engine('sqlite:///data/infosys.db')
+session_engine = web.database(dbn="sqlite",db="data/session.db")
 #渲染器
 render = render_jinja(os.getcwd() + '/templates',encoding = 'utf-8')
 account_render = render_jinja(os.getcwd() + '/templates/account',encoding = 'utf-8')
@@ -15,7 +15,7 @@ account_render = render_jinja(os.getcwd() + '/templates/account',encoding = 'utf
     
 #钩子
 def load_sqlalchemy(handler):
-    web.ctx.orm = scoped_session(sessionmaker(bind=engine))
+    web.ctx.orm = scoped_session(sessionmaker(bind=infosys_engine))
     try:
         return handler()
     except web.HTTPError:

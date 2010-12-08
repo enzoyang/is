@@ -1,17 +1,18 @@
 #coding:UTF-8
 import web
-from settings import load_sqlalchemy,load_session
-
+from settings import load_sqlalchemy,load_session,session_engine
+import account
 web.config.debug = False
 
 urls=(
     #global
-    '/(.*)/','common.Redirect',
-    '/error/(.*)','common.Error',
+    #'/(.*)','common.Redirect',
+    '/error/(.*)/','common.Error',
     #account
-    '/','account.Login',
-    '/login','account.Login',
-    '/logout','account.Logout',
+    '/admin',account.account_app,
+    #'/','account.Login',
+    #'/login','account.Login',
+    #'/logout','account.Logout',
     #expense
     
 )
@@ -23,8 +24,7 @@ app.add_processor(load_sqlalchemy)
 app.add_processor(load_session)
 
 #session
-db = web.database(dbn="sqlite",db="data/infosys.db")
-store = web.session.DBStore(db,'sessions')
+store = web.session.DBStore(session_engine,'sessions')
 session = web.session.Session(app, store)
 web.config._session = session
 

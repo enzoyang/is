@@ -1,7 +1,7 @@
 #coding:UTF-8
 from sqlalchemy import Column,Integer,String,DateTime,ForeignKey,Numeric
 from sqlalchemy.ext.declarative import declarative_base
-from settings import engine
+from settings import infosys_engine
 
 Base = declarative_base()
 
@@ -78,4 +78,4 @@ class Electric(Base):
 metadata = Base.metadata
 
 if __name__ == '__main__':
-    metadata.create_all(engine)
+    metadata.create_all(infosys_engine)
