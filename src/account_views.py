@@ -2,8 +2,17 @@
 import web
 from models import Account
 from settings import account_render,render,Errors
-##region
-##end region
+
+#decorators
+def admin_required(func):
+    def function(*args):
+        if web.ctx.session.isLogin == 0:
+            web.seeother('/login')
+        else:
+            return func(*args)
+    return function
+
+#views
 class Error:
     def GET(self,error_msg):
         return render.error(error_msg=error_msg)
