@@ -29,11 +29,14 @@ class User(Base):
     id = Column(Integer,primary_key=True)
     identity = Column(String(20))
     realName = Column(String(20))
+    water = Column(Integer)
+    electric = Column(Integer)
     
-    def __init__(self,_identity,_realName):
+    def __init__(self,_identity,_realName,_water,_electric):
         self.identity = _identity
         self.realName = _realName
-        
+        self.water = _water
+        self.electric = _electric
     def __repr__(self):
         return "User(%s,%s)" % (self.identity,self.realName)
         
@@ -46,13 +49,17 @@ class Water(Base):
     monthlyDegrees = Column(Integer)
     monthlyExpense = Column(Numeric)
     isPayed = Column(Boolean)
+    year = Column(Integer)
+    month = Column(Integer)
     
-    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense,_isPayed):
+    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense,_isPayed,_year,_month):
         self.userId = _userId
         self.totalDegrees = _totalDegrees
         self.monthlyDegrees = _monthlyDegrees
         self.monthlyExpense = _monthlyExpense
         self.isPayed = _isPayed
+        self.year = _year
+        self.month = _month
         
     def __repr__(self):
         return "Water(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
@@ -66,13 +73,18 @@ class Electric(Base):
     monthlyDegrees = Column(Integer)
     monthlyExpense = Column(Numeric)
     isPayed = Column(Boolean)
+    year = Column(Integer)
+    month = Column(Integer)
+
     
-    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense):
+    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense,_year,_month):
         self.userId = _userId
         self.totalDegrees = _totalDegrees
         self.monthlyDegrees = _monthlyDegrees
         self.monthlyExpense = _monthlyExpense
         self.isPayed = _isPayed
+        self.year = _year
+        self.month = _month
         
     def __repr__(self):
         return "Electric(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)

@@ -13,6 +13,8 @@
           <th>用户ID</th>
           <th>用户姓名</th>
           <th>用户标识</th>
+          <th>初始水表数</th>
+          <th>初始电表数</th>
           <th>用户操作</th>
         </tr>
         {% for user in totalUser:%}
@@ -20,6 +22,8 @@
           <td>{{user.id}}</td>
           <td>{{user.realName}}</td>
           <td>{{user.identity}}</td>
+          <td>{{user.water}}</td>
+          <td>{{user.electric}}</td>
           <td><a href="/expense/user/{{user.identity}}/edit/">编辑</a> | <a href="/expense/user/{{user.identity}}/yamade/">删除</a></td>
         </tr>
          {% endfor %}

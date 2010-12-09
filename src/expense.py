@@ -57,9 +57,9 @@ class AddUser(AuthBase,AccountBase):
         return user_render.add(**d)
     
     def POST(self):
-        i = web.input(realName=None)
-        if i.realName:
-            u = User(generalIdentity(),i.realName)
+        i = web.input(realName=None,water=0,electric=0)
+        if i.realName and i.water and i.electric:
+            u = User(_identity=generalIdentity(),_realName=i.realName,_water=i.water,_electric=i.electric)
             web.ctx.orm.add(u)
             d['infos'] = Infos.userAddSuccess
         else:
@@ -79,11 +79,13 @@ class EditUser(AuthBase,AccountBase):
         return user_render.edit(**d)
         
     def POST(self,identity):
-        i = web.input(realName = None , identity = None)
-        if i.realName and i.identity:
+        i = web.input(realName = None , identity = None , water = 0 ,electric = 0)
+        if i.realName and i.identity and i.water and i.electric:
             u = web.ctx.orm.query(User).filter_by(identity=identity).first()
             u.realName = i.realName
             u.identity = i.identity
+            u.water = i.water
+            u.electric = i.electric
             d['infos'] = Infos.userinfoUpdateSuccess
             d['user'] = u
         else:
@@ -107,7 +109,9 @@ class DeleteUser(AuthBase):
         u = web.ctx.orm.query(User).filter_by(identity=identity).first()
         web.ctx.orm.delete(u)
         web.seeother('/expense/user/',absolute=True)
-    
+        
+#用户管理结束
+
 #水费管理
 #电费管理
 
@@ -121,6 +125,8 @@ urls=(
     '/user/list/(.*)/',ListUser,
     '/user/(\d+)/yamade/',ComfirmDeleteUser,
     '/user/(\d+)/delete/',DeleteUser,
+    
+    
 )
 
 expense_app = web.application(urls,locals())
