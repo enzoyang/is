@@ -4,14 +4,14 @@ from models import Account
 from settings import account_render,render,Errors
 
 #decorators
-def admin_required(func):
-    def Function(*args,**kargs):
-        isLogin = web.ctx.session.get('isLogin',0)
-        if isLogin == 0:
-            web.seeother('/admin/login/',absolute=True)
-        else:
-            return func(*args,**kargs)
-    return Function
+#def admin_required(func):
+#    def Function(*args,**kargs):
+#        isLogin = web.ctx.session.get('isLogin',0)
+#        if isLogin == 0:
+#            web.seeother('/admin/login/',absolute=True)
+#        else:
+#            return func(*args,**kargs)
+#    return Function
 
 #需要验证的action的基类
 class AuthBase:
