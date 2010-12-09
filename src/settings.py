@@ -36,3 +36,11 @@ def load_session(handler):
 class Errors:
     usernameOrPasswordNotBeNull = u'用户名和密码不能为空'
     usernameAndPasswordVerifyFailure = u'用户名和密码验证失败'
+    
+    realNameNotBeNull = u'用户名不能为空'
+    
+    userinfoNotBeNull = u'用户信息不能为空'
+class Infos:
+    userAddSuccess = u'用户添加成功'
+    identityNotBeModify = u'用户标识为自动生成，平时不允许修改，如需修改，请联系开发人员'
+    userinfoUpdateSuccess = u'用户信息更新成功'

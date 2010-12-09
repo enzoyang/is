@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}水电管理系统{% endblock %}
+{% block slogan %}水电管理系统{% endblock %}
+{% block content %}
+<div class="t-center">
+    {% if errors:%}
+        <label id="errors" class="msg error">{{errors}}</label>
+        {%else:%}
+        <label id="errors" class="msg info">{{infos}}</label>
+        {%endif%}
+        <br/>
+        <br/>
+    <form method=POST action="/expense/user/add/">
+        <label for="username">用户姓名：</label><input type="text" name="realName" id="realName" class="input-text"/>
+        <br/>
+        
+        <input type="submit" value="添加"/>
+    </form>
+</div>
+{% endblock %}

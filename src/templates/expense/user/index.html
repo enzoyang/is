@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}水电管理系统{% endblock %}
+{% block slogan %}水电管理系统{% endblock %}
+{% block content %}
+<div class="t-center">
+    
+<p id="btn-create" class="box"><a href="#"><h1>一共有{{totalUserCount}}个用户</h1></a></p>
+
+
+{% if totalUser:%}
+<table align="center">
+        <tr>
+          <th>用户ID</th>
+          <th>用户姓名</th>
+          <th>用户标识</th>
+          <th>用户操作</th>
+        </tr>
+        {% for user in totalUser:%}
+         <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.realName}}</td>
+          <td>{{user.identity}}</td>
+          <td><a href="/expense/user/{{user.identity}}/edit/">编辑</a> | <a href="/expense/user/{{user.identity}}/delete/">删除</a></td>
+        </tr>
+         {% endfor %}
+</table>
+{% endif %}
+</div>
+
+
+{% endblock %}

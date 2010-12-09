@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>{% block title %}{% endblock %}-综合信息管理平台</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/reset.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/main.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/1col.css" title="1col" />
+<!--[if lte IE 6]><link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/main-ie6.css" /><![endif]-->
+<link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/style.css" />
+<link rel="stylesheet" media="screen,projection" type="text/css" href="/static/css/mystyle.css" />
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+
+</head>
+<body>
+<div id="main">
+  <!-- Tray -->
+  <div id="tray" class="box">
+    <p class="f-left box"><h1>{% block slogan %}{% endblock %}</h1></p>
+    <p class="f-right">当前登录用户: <strong><a href="#">{{ admin }}</a></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong><a href="/admin/logout/" id="logout">退出登录</a></strong></p>
+  </div>
+  <!--  /tray -->
+  <hr class="noscreen" />
+  <!-- Menu -->
+  <div id="menu" class="box">
+    <ul class="box">
+	{% for href,value in links:%}
+      <li><a href="{{href}}"><span>{{value}}</span></a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  <hr class="noscreen" />
+  <div id="cols" class="box">
+    <hr class="noscreen" />
+    <div id="content" class="box">
+     {% block content %}{% endblock %}
+  </div>
+  <hr class="noscreen" />
+  <!-- Footer -->
+  <div id="footer" class="box">
+    <p class="f-left">&copy; 2010 <a href="#">蒙自汇力科技有限责任公司</a>, 版权所有 &reg;</p>
+    <p class="f-right">本系统使用 Web.py , Jinja , Sqlite 构建</p>
+  </div>
+  <!-- /footer -->
+</div>
+<!-- /main -->
+</body>
+</html>
