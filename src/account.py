@@ -4,7 +4,7 @@ from models import Account
 from settings import account_render,render,Errors
 #用于传递变量
 d = {}
-d['links'] = [('/admin/login/',u'系统登录'),('/admin/entry/',u'管理入口'),('/admin/logout/',u'退出系统')]
+d['links'] = [('/admin/login/',u'系统登录'),('/admin/entry/',u'管理入口')]
 #decorators
 #def admin_required(func):
 #    def Function(*args,**kargs):

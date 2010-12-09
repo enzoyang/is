@@ -12,7 +12,6 @@ urls=(
     #apps
     '/admin',account.account_app,
     '/expense',expense.expense_app,
-    '/user',user.user_app,
     #expense
     
 )
