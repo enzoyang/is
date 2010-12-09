@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}水电管理系统{% endblock %}
+{% block slogan %}水电管理系统{% endblock %}
+{% block content %}
+<div class="t-center">
+    {% if errors:%}
+        <label id="errors" class="msg error">{{errors}}</label>
+        {%else:%}
+        <label id="errors" class="msg info">{{infos}}</label>
+        {%endif%}
+        <br/>
+        <br/>
+    <form method=POST action="/expense/user/add/">
+        <label for="username">用户姓名：</label><input type="text" name="realName" id="realName" class="input-text"/>
+        <br/>
+        <label for="username">原始水表数：</label><input type="text" name="water" id="water" class="input-text"/>
+        <br/>
+        <label for="username">原始电表数：</label><input type="text" name="electric" id="electric" class="input-text"/>
+        <br/>
+        <input type="submit" value="添加"/>
+    </form>
+</div>
+{% endblock %}

@@ -31,12 +31,17 @@ class User(Base):
     realName = Column(String(20))
     water = Column(Integer)
     electric = Column(Integer)
+    nowWater = Column(Integer)
+    nowElectric = Column(Integer)
     
-    def __init__(self,_identity,_realName,_water,_electric):
+    def __init__(self,_identity,_realName,_water,_electric,_nowWater,_nowElectric):
         self.identity = _identity
         self.realName = _realName
         self.water = _water
         self.electric = _electric
+        self.nowWater = _nowWater
+        self.nowElectric = _nowElectric
+        
     def __repr__(self):
         return "User(%s,%s)" % (self.identity,self.realName)
         

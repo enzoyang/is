@@ -3,7 +3,7 @@ import web
 import user
 from common import generalIdentity
 from account import AuthBase
-from settings import expense_render,user_render,Errors,Infos
+from settings import expense_render,user_render,water_render,Errors,Infos
 from models import Water,Electric,User
 d={}
 d['links'] = []
@@ -22,8 +22,7 @@ class Index(AuthBase,AccountBase):
         d['links'] = [
             ('/admin/entry/',u'返回管理入口'),
             ('/expense/user/',u'水电用户管理'),
-            ('/expense/water/',u'水费管理'),
-            ('/expense/electric/',u'电费管理'),
+            ('/expense/manager/',u'水电管理'),
             ('/expense/report/',u'报表系统'),
             ]
         
@@ -59,7 +58,9 @@ class AddUser(AuthBase,AccountBase):
     def POST(self):
         i = web.input(realName=None,water=0,electric=0)
         if i.realName and i.water and i.electric:
-            u = User(_identity=generalIdentity(),_realName=i.realName,_water=i.water,_electric=i.electric)
+            u = User(_identity=generalIdentity(),_realName=i.realName,
+                     _water=i.water,_electric=i.electric,
+                     _nowWater=i.water,_nowElectric=i.electric)
             web.ctx.orm.add(u)
             d['infos'] = Infos.userAddSuccess
         else:
@@ -112,8 +113,23 @@ class DeleteUser(AuthBase):
         
 #用户管理结束
 
-#水费管理
-#电费管理
+#水电费管理
+class IndexManager(AuthBase,AccountBase):
+    def __init__(self):
+        AuthBase.__init__(self)
+        AccountBase.__init__(self)
+        d['links'] = [('/expense/',u'返回水电管理系统首页'),]
+    
+    def GET(self):
+        d['totalUser'] = web.ctx.orm.query(User).all()
+        return water_render.index(**d)
+        
+class AddManager(AuthBase,AccountBase):
+    def __init__(self):
+        AuthBase.__init__(self)
+        AccountBase.__init__(self)
+        d['links'] = [('/expense/',u'返回水电管理系统首页'),]
+
 
 urls=(
     '/',Index,
@@ -126,6 +142,7 @@ urls=(
     '/user/(\d+)/yamade/',ComfirmDeleteUser,
     '/user/(\d+)/delete/',DeleteUser,
     
+    '/manager/',IndexManager,
     
 )
 
