@@ -1,5 +1,5 @@
 #coding:UTF-8
-from sqlalchemy import Column,Integer,String,DateTime,ForeignKey,Numeric
+from sqlalchemy import Column,Integer,String,DateTime,ForeignKey,Numeric,Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from settings import infosys_engine
 
@@ -45,13 +45,15 @@ class Water(Base):
     totalDegrees = Column(Integer)
     monthlyDegrees = Column(Integer)
     monthlyExpense = Column(Numeric)
+    isPayed = Column(Boolean)
     
-    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense):
+    def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense,_isPayed):
         self.userId = _userId
         self.totalDegrees = _totalDegrees
         self.monthlyDegrees = _monthlyDegrees
         self.monthlyExpense = _monthlyExpense
-    
+        self.isPayed = _isPayed
+        
     def __repr__(self):
         return "Water(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
     
@@ -63,13 +65,15 @@ class Electric(Base):
     totalDegrees = Column(Integer)
     monthlyDegrees = Column(Integer)
     monthlyExpense = Column(Numeric)
+    isPayed = Column(Boolean)
     
     def __init__(self,_totalDegrees,_monthlyDegrees,_monthlyExpense):
         self.userId = _userId
         self.totalDegrees = _totalDegrees
         self.monthlyDegrees = _monthlyDegrees
         self.monthlyExpense = _monthlyExpense
-    
+        self.isPayed = _isPayed
+        
     def __repr__(self):
         return "Electric(%d,%d,%d,%d)" % (self.userId,self.totalDegrees,self.monthlyDegrees,self.monthlyExpense)
         

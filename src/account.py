@@ -5,12 +5,20 @@ from settings import account_render,render,Errors
 
 #decorators
 def admin_required(func):
-    def function(*args):
-        if web.ctx.session.isLogin == 0:
-            web.seeother('/')
+    def Function(*args,**kargs):
+        isLogin = web.ctx.session.get('isLogin',0)
+        if isLogin == 0:
+            web.seeother('/admin/login/',absolute=True)
         else:
-            return func(*args)
-    return function
+            return func(*args,**kargs)
+    return Function
+
+#需要验证的action的基类
+class AuthBase:
+    def __init__(self):
+        isLogin = web.ctx.session.get('isLogin',0)
+        if isLogin == 0:
+            raise web.seeother('/admin/login/',absolute=True)
 
 #views
 
@@ -50,7 +58,7 @@ class Login:
 class Logout:
     def GET(self):
         web.ctx.session.kill()
-        web.seeother('/')
+        web.seeother('/admin/login/',absolute=True)
 
 #urls
 
