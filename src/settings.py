@@ -13,7 +13,6 @@ render = render_jinja(os.getcwd() + '/templates',encoding = 'utf-8')
 account_render = render_jinja(os.getcwd() + '/templates/account',encoding = 'utf-8')
 expense_render = render_jinja(os.getcwd() + '/templates/expense',encoding = 'utf-8')
     
-    
 #钩子
 def load_sqlalchemy(handler):
     web.ctx.orm = scoped_session(sessionmaker(bind=infosys_engine))
