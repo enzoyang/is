@@ -1,22 +1,23 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-    "http://www.w3.org/TR/html4/strict.dtd"
-    >
-<html lang="en">
-<head>
-    <title>登录系统</title>
-</head>
-<body>
-    {{isLogin}}
-    <form method=POST action="/admin/login/">
-        <label for="username">用户：</label><input type="text" name="username" id="username"/>
-        <br/>
-        <label for="password">密码：</label><input type="password" name="password" id="password"/>
-        <br/>
-        {% if errors:%}
-        <label id="errors">{{errors}}</label>
+{% extends 'base.html' %}
+{% block title %}系统登录{% endblock %}
+{% block slogan %}系统登录{% endblock %}
+{% block content %}
+<div class="t-center">
+    {% if errors:%}
+        <label id="errors" class="msg error">{{errors}}</label>
+        {%else:%}
+        <label id="errors" class="msg info">请输入用户名和密码进行登录</label>
         {%endif%}
         <br/>
+        <br/>
+    <form method=POST action="/admin/login/">
+        <label for="username">用户：</label><input type="text" name="username" id="username" class="input-text"/>
+        <br/>
+        <label for="password">密码：</label><input type="password" name="password" id="password" class="input-text"/>
+        <br/>
+        
         <input type="submit" value="登录"/>
     </form>
-</body>
-</html>
+</div>
+        
+{% endblock %}

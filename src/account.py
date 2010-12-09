@@ -2,7 +2,9 @@
 import web
 from models import Account
 from settings import account_render,render,Errors
-
+#用于传递变量
+d = {}
+d['links'] = [('/admin/login/',u'系统登录'),('/admin/logout/',u'退出系统')]
 #decorators
 #def admin_required(func):
 #    def Function(*args,**kargs):
@@ -35,12 +37,14 @@ class AuthBase:
 #        else:
 #            error_msg = Errors.usernameOrPasswordNotBeNull
 #            web.seeother('/error/' + error_msg)
+class AccountBase:
+    def __init__(self):
+        d['admin'] = u'未登录' if web.ctx.session.get('currentUser',None) == None else web.ctx.session.get('currentUser')
 
-class Login:
+class Login(AccountBase):
     def GET(self):
-        isLogin = web.ctx.session.get('isLogin',0)
-    
-        return account_render.login(isLogin=isLogin)
+        
+        return account_render.login(**d)
     
     def POST(self):
         i = web.input(username=None,password=None)
@@ -49,11 +53,14 @@ class Login:
             if u:
                 #pass # 验证成功，转向。
                 web.ctx.session.isLogin = 1;
+                web.ctx.session.currentUser = i.username
                 return '登录成功'
             else:#验证失败
-                return account_render.login(errors=Errors.usernameAndPasswordVerifyFailure)
+                d['errors'] = Errors.usernameAndPasswordVerifyFailure
+                return account_render.login(**d)
         else:
-            return account_render.login(errors=Errors.usernameOrPasswordNotBeNull)
+            d['errors'] = Errors.usernameOrPasswordNotBeNull
+            return account_render.login(**d)
             
 class Logout:
     def GET(self):
