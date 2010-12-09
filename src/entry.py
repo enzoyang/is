@@ -4,12 +4,14 @@ from settings import load_sqlalchemy,load_session,session_engine
 import account
 import expense
 import user
+import common
 web.config.debug = False
 
 urls=(
     #global
     '/error/(.*)/','common.Error',
     #apps
+    '/',common.Redirect,
     '/admin',account.account_app,
     '/expense',expense.expense_app,
     #expense

@@ -44,3 +44,4 @@ class Infos:
     userAddSuccess = u'用户添加成功'
     identityNotBeModify = u'用户标识为自动生成，平时不允许修改，如需修改，请联系开发人员'
     userinfoUpdateSuccess = u'用户信息更新成功'
+    inputRealName = u'请输入要添加的用户姓名'

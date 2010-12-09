@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}水电管理系统{% endblock %}
+{% block slogan %}水电管理系统{% endblock %}
+{% block content %}
+<div class="t-center">
+        <label id="errors" class="msg warning">确实要删除此用户吗？</label>
+        <br/>
+        <br/>
+    <form method=POST action="/expense/user/{{user.identity}}/delete/">
+        <label for="username">用户姓名：</label><input type="text" disabled="disabled" name="realName" id="realName" class="input-text" value="{{user.realName}}"/>
+        <br/>
+         <label for="username">用户标识：</label><input type="text" disabled="disabled" name="identity" id="identity" class="input-text" value="{{user.identity}}"/><br/>
+        <br/>
+        <input type="submit" value="删除"/> | <input type="button" value="取消" onclick="javascript:history.go(-1);"/>
+    </form>
+</div>
+{% endblock %}

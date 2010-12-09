@@ -19,7 +19,13 @@ class Index(AuthBase,AccountBase):
     def __init__(self):
         AuthBase.__init__(self)
         AccountBase.__init__(self)
-        d['links'] = [('/admin/entry/',u'返回管理入口')]
+        d['links'] = [
+            ('/admin/entry/',u'返回管理入口'),
+            ('/expense/user/',u'水电用户管理'),
+            ('/expense/water/',u'水费管理'),
+            ('/expense/electric/',u'电费管理'),
+            ('/expense/report/',u'报表系统'),
+            ]
         
     def GET(self):
         return expense_render.entry(**d)
@@ -47,6 +53,7 @@ class AddUser(AuthBase,AccountBase):
         d['links'] = [('/expense/',u'返回水电管理系统首页'),('/expense/user/',u'返回用户管理首页'),]
         
     def GET(self):
+        d['infos'] = Infos.inputRealName
         return user_render.add(**d)
     
     def POST(self):
@@ -88,11 +95,18 @@ class EditUser(AuthBase,AccountBase):
     
 class ListUser(AuthBase):
     def GET(self,pageCount):
-        return 'user list'
-    
-class DeleteUser(AuthBase):
+        return '未实现'
+
+class ComfirmDeleteUser(AuthBase):
     def GET(self,identity):
-        return 'user delete : no.%s' % identity
+        d['user'] = web.ctx.orm.query(User).filter_by(identity=identity).first()
+        return user_render.yamade(**d)
+        
+class DeleteUser(AuthBase):
+    def POST(self,identity):
+        u = web.ctx.orm.query(User).filter_by(identity=identity).first()
+        web.ctx.orm.delete(u)
+        web.seeother('/expense/user/',absolute=True)
     
 #水费管理
 #电费管理
@@ -105,6 +119,7 @@ urls=(
     '/user/add/',AddUser,
     '/user/(\d+)/edit/',EditUser,
     '/user/list/(.*)/',ListUser,
+    '/user/(\d+)/yamade/',ComfirmDeleteUser,
     '/user/(\d+)/delete/',DeleteUser,
 )
 
