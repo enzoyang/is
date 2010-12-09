@@ -3,6 +3,7 @@ import web
 from settings import load_sqlalchemy,load_session,session_engine
 import account
 import expense
+import user
 web.config.debug = False
 
 urls=(
@@ -11,6 +12,7 @@ urls=(
     #apps
     '/admin',account.account_app,
     '/expense',expense.expense_app,
+    '/user',user.user_app,
     #expense
     
 )

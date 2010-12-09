@@ -7,13 +7,23 @@ class AddUser(AuthBase):
         pass
     
 class EditUser(AuthBase):
-    def GET(self):
+    def GET(self,identity):
         pass
     
 class ListUser(AuthBase):
-    def GET(self):
+    def GET(self,pageCount):
         pass
     
 class DeleteUser(AuthBase):
-    def GET(self):
+    def GET(self,identity):
         pass
+    
+    
+urls = (
+    '/add',AddUser,
+    '/(.*)/edit',EditUser,
+    '/list/(.*)',ListUser,
+    '/(.*)/delete',DeleteUser,
+)
+
+user_app = web.application(urls,locals())
