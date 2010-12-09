@@ -132,6 +132,7 @@ class AddManager(AuthBase,AccountBase):
 
 
 urls=(
+    
     '/',Index,
     '/index/',Index,
     
