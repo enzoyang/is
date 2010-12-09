@@ -12,6 +12,7 @@ session_engine = web.database(dbn="sqlite",db="data/session.db")
 render = render_jinja(os.getcwd() + '/templates',encoding = 'utf-8')
 account_render = render_jinja(os.getcwd() + '/templates/account',encoding = 'utf-8')
 expense_render = render_jinja(os.getcwd() + '/templates/expense',encoding = 'utf-8')
+user_render = render_jinja(os.getcwd() + '/templates/expense/user',encoding = 'utf-8')
     
 #钩子
 def load_sqlalchemy(handler):
