@@ -7,14 +7,10 @@ web.config.debug = False
 
 urls=(
     #global
-    #'/(.*)','common.Redirect',
     '/error/(.*)/','common.Error',
-    #account
+    #apps
     '/admin',account.account_app,
     '/expense',expense.expense_app,
-    #'/','account.Login',
-    #'/login','account.Login',
-    #'/logout','account.Logout',
     #expense
     
 )
