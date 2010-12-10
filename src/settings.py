@@ -2,18 +2,18 @@
 import os
 import web
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session,sessionmaker
+from sqlalchemy.orm import scoped_session, sessionmaker
 from web.contrib.template import render_jinja
 
 #数据库驱动
 infosys_engine = create_engine('sqlite:///data/infosys.db')
-session_engine = web.database(dbn="sqlite",db="data/session.db")
+session_engine = web.database(dbn="sqlite", db="data/session.db")
 #渲染器
-render = render_jinja(os.getcwd() + '/templates',encoding = 'utf-8')
-account_render = render_jinja(os.getcwd() + '/templates/account',encoding = 'utf-8')
-expense_render = render_jinja(os.getcwd() + '/templates/expense',encoding = 'utf-8')
-user_render = render_jinja(os.getcwd() + '/templates/expense/user',encoding = 'utf-8')
-manager_render = render_jinja(os.getcwd() + '/templates/expense/manager',encoding = 'utf-8')
+render = render_jinja(os.getcwd() + '/templates', encoding='utf-8')
+account_render = render_jinja(os.getcwd() + '/templates/account', encoding='utf-8')
+expense_render = render_jinja(os.getcwd() + '/templates/expense', encoding='utf-8')
+user_render = render_jinja(os.getcwd() + '/templates/expense/user', encoding='utf-8')
+manager_render = render_jinja(os.getcwd() + '/templates/expense/manager', encoding='utf-8')
     
 #钩子
 def load_sqlalchemy(handler):
