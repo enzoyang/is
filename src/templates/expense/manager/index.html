@@ -28,7 +28,7 @@
           <td>{{user.electric}}</td>
           <td>{{user.nowWater}}</td>
           <td>{{user.nowElectric}}</td>
-          <td><a href="/expense/manager/add/">添加使用信息</a></td>
+          <td><a href="/expense/manager/{{user.identity}}/add/">添加使用信息</a></td>
         </tr>
          {% endfor %}
 </table>

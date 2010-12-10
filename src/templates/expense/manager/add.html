@@ -3,21 +3,38 @@
 {% block slogan %}水电管理系统{% endblock %}
 {% block content %}
 <div class="t-center">
-    {% if errors:%}
-        <label id="errors" class="msg error">{{errors}}</label>
-        {%else:%}
-        <label id="errors" class="msg info">{{infos}}</label>
-        {%endif%}
-        <br/>
-        <br/>
-    <form method=POST action="/expense/user/add/">
-        <label for="username">用户姓名：</label><input type="text" name="realName" id="realName" class="input-text"/>
-        <br/>
-        <label for="username">原始水表数：</label><input type="text" name="water" id="water" class="input-text"/>
-        <br/>
-        <label for="username">原始电表数：</label><input type="text" name="electric" id="electric" class="input-text"/>
-        <br/>
-        <input type="submit" value="添加"/>
-    </form>
+    
+<p id="btn-create" class="box"><a href="#"><h1>添加用户“{{user.realName}}”的使用信息</h1></a></p>
+
+<table align="center">
+        <tr>
+          <th>用户ID</th>
+          <th>用户姓名</th>
+          <th>用户标识</th>
+          <th>初始水表数</th>
+          <th>初始电表数</th>
+          <th>当前水表数</th>
+          <th>当前电表数</th>
+        </tr>
+         <tr>
+          <td>{{user.id}}</td>
+          <td>{{user.realName}}</td>
+          <td>{{user.identity}}</td>
+          <td>{{user.water}}</td>
+          <td>{{user.electric}}</td>
+          <td>{{user.nowWater}}</td>
+          <td>{{user.nowElectric}}</td>
+        </tr>
+</table>
 </div>
+
+<form method="post" action="/expense/manager/{{user.identity}}/add/">
+    <label for="year">年份：</label><input type="text" name="year" id="year" size=4 />
+    <label for="year">月份：</label><input type="text" name="month" id="month" size=2/><br/>
+    <label for="nowWater">当前水表数：</label><input type="text" name="nowWater" id="nowWater" size=10/><br/>
+    <label for="nowElectric">当前电表数：</label><input type="text" name="nowElectric" id="nowElectric" size=10/><br/>
+    <label for="waterPrice">水费单价：</label><input type="text" name="waterPrice" id="waterPrice" size=2/>
+    <label for="electricPrice">电费单价：</label><input type="text" name="electricPrice" id="electricPrice" size=2/><br/>
+    <input type="submit" value="添加"> <input type="button" value="取消" onclick="javascript:history.go(-1);">
+</form>
 {% endblock %}

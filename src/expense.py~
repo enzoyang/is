@@ -1,9 +1,9 @@
 #coding:UTF-8
 import web
 import user
-from common import generalIdentity,generateWorkbook
+from common import generalIdentity
 from account import AuthBase
-from settings import expense_render,user_render,manager_render,Errors,Infos
+from settings import expense_render,user_render,water_render,Errors,Infos
 from models import Water,Electric,User
 d={}
 d['links'] = []
@@ -25,7 +25,7 @@ class Index(AuthBase,AccountBase):
             ('/expense/manager/',u'水电管理'),
             ('/expense/report/',u'报表系统'),
             ]
-
+        
     def GET(self):
         return expense_render.entry(**d)
 
@@ -118,30 +118,18 @@ class IndexManager(AuthBase,AccountBase):
     def __init__(self):
         AuthBase.__init__(self)
         AccountBase.__init__(self)
-        d['links'] = [('/expense/',u'返回水电管理系统首页'),('/expense/manager/generate/',u'生成登记表'),]
+        d['links'] = [('/expense/',u'返回水电管理系统首页'),]
     
     def GET(self):
         d['totalUser'] = web.ctx.orm.query(User).all()
-        return manager_render.index(**d)
-
-class Generate(AuthBase,AccountBase):
-    def __init__(self):
-        AuthBase.__init__(self)
-        AccountBase.__init__(self)
+        return water_render.index(**d)
         
-    def GET(self):
-        path = generateWorkbook()
-        return path
-    
 class AddManager(AuthBase,AccountBase):
     def __init__(self):
         AuthBase.__init__(self)
         AccountBase.__init__(self)
         d['links'] = [('/expense/',u'返回水电管理系统首页'),]
-        
-    def GET(self,identity):
-        d['user'] = web.ctx.orm.query(User).filter_by(identity=identity).first()
-        return manager_render.add(**d)
+
 
 urls=(
     
@@ -156,8 +144,7 @@ urls=(
     '/user/(\d+)/delete/',DeleteUser,
     
     '/manager/',IndexManager,
-    '/manager/generate/',Generate,
-    '/manager/(\d+)/add/',AddManager,
+    
 )
 
 expense_app = web.application(urls,locals())
